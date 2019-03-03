@@ -1,0 +1,50 @@
+{
+  "name": "nodejs-service-seed",
+  "version": "1.0.0",
+  "description": "Base seed project for NodeJS services",
+  "main": "index.js",
+  "repository": "https://github.com/RapidAPI/nodejs-service-seed.git",
+  "scripts": {
+    "start": "node .",
+    "precommit": "lint-staged",
+    "lint": "eslint ./ --cache",
+    "lintfix": "eslint ./ --fix",
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --recursive"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "test",
+      "git add"
+    ]
+  },
+  "pre-commit": "precommit",
+  "dependencies": {
+    "@newrelic/native-metrics": "4.1.0",
+    "body-parser": "1.18.3",
+    "chai": "4.2.0",
+    "chai-http": "4.2.1",
+    "cluster": "^0.7.7",
+    "compression": "^1.7.0",
+    "config": "3.0.1",
+    "express": "4.16.4",
+    "fs": "^0.0.1-security",
+    "joi": "^14.3.1",
+    "jsdoc": "3.5.5",
+    "mocha": "6.0.2",
+    "newrelic": "5.5.0",
+    "os": "^0.1.1",
+    "swagger-jsdoc": "^3.2.7",
+    "winston": "3.2.1",
+    "winston-logstash": "0.4.0",
+    "winston-meta-wrapper": "1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "5.15.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-no-loops": "0.3.0",
+    "lint-staged": "8.1.5",
+    "pre-commit": "1.2.2"
+  }
+}

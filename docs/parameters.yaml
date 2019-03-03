@@ -1,0 +1,13 @@
+parameters:
+  num:
+    name: num
+    description: The number to multiply
+    in: path
+    required: true
+    type: string
+  float:
+    name: float
+    description: Return result as floating point
+    in: query
+    required: false
+    type: boolean
