@@ -1,29 +1,17 @@
-/* eslint-disable */
-if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging") {
-  require("newrelic");
-  require("@newrelic/native-metrics");
-}
 
 const config      = require("config");
-const compression = require('compression')
+const compression = require("compression")
 const Express     = require("express");
 const fs          = require("fs");
 const logger      = require("./utils/logger");
 const setupSwagger = require("./docs/swaggerConfig");
-const cluster     = require('cluster');
-const numCPUs     = require('os').cpus().length;
+const cluster     = require("cluster");
+const numCPUs     = require("os").cpus().length;
 
 const app         = new Express();
 const port        = process.env.PORT || config.get("DefaultPort");
 
 const { NODE_ENV = "" } = process.env;
-// add exception handler to prevent crash from newrelic errors
-if (NODE_ENV !== "test" && NODE_ENV !== "localhost") {
-  console.log("no exceptions");
-  process.on('uncaughtException', function(err) {
-    logger.error(`process.on handler catch error - ${err}`);
-  });
-}
 
 if (cluster.isMaster && NODE_ENV !== "test") {
   logger.info(`[${config.get("ServiceName")}] - Master ${process.pid} is running`);
@@ -33,14 +21,13 @@ if (cluster.isMaster && NODE_ENV !== "test") {
     cluster.fork();
   }
 
-  cluster.on('exit', (worker, code, signal) => {
+  cluster.on("exit", (worker, code, signal) => {
     logger.error(`[${config.get("ServiceName")}] - Worker ${worker.process.pid} died with code ${code} and signal ${signal}`);
     logger.info(`[${config.get("ServiceName")}] - Starting a new worker`);
     cluster.fork();
   });
 
 } else {
-
   app.use(compression());
 
   global.logger = logger;
@@ -50,10 +37,10 @@ if (cluster.isMaster && NODE_ENV !== "test") {
   });
 
   if (NODE_ENV !== "production") {
-    app.options("/docs", (req, res, next) => {
+    app.options("/docs", (req, res, next) => { // eslint-disable-line
       res.header("Access-Control-Allow-Origin", "*");
-      res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+      res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+      res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
       res.sendStatus(200);
     });
     app.use((req, res, next) => {

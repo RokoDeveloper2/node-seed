@@ -5,6 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/RapidAPI/nodejs-service-seed.git",
   "scripts": {
+    "dev": "nodemon --exec 'NODE_ENV=localhost node ./index.js'",
     "start": "node .",
     "precommit": "lint-staged",
     "lint": "eslint ./ --cache",
@@ -20,7 +21,6 @@
   },
   "pre-commit": "precommit",
   "dependencies": {
-    "@newrelic/native-metrics": "4.1.0",
     "body-parser": "1.18.3",
     "chai": "4.2.0",
     "chai-http": "4.2.1",
@@ -30,21 +30,20 @@
     "express": "4.16.4",
     "fs": "^0.0.1-security",
     "joi": "^14.3.1",
-    "jsdoc": "3.5.5",
+    "jsdoc": "^3.6.2",
     "mocha": "6.0.2",
-    "newrelic": "5.5.0",
     "os": "^0.1.1",
-    "swagger-jsdoc": "^3.2.7",
-    "winston": "3.2.1",
-    "winston-logstash": "0.4.0",
-    "winston-meta-wrapper": "1.2.0"
+    "swagger-jsdoc": "^3.2.9",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "5.15.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-no-loops": "0.3.0",
+    "eslint-plugin-node": "^9.1.0",
     "lint-staged": "8.1.5",
+    "nodemon": "^1.19.1",
     "pre-commit": "1.2.2"
   }
 }
