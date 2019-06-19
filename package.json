@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/RapidAPI/nodejs-service-seed.git",
   "scripts": {
-    "dev": "nodemon --exec 'NODE_ENV=localhost node ./index.js'",
+    "dev": "NODE_ENV=localhost node ./index.js",
     "start": "node .",
     "precommit": "lint-staged",
     "lint": "eslint ./ --cache",
@@ -15,7 +15,6 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "test",
       "git add"
     ]
   },
@@ -32,7 +31,9 @@
     "joi": "^14.3.1",
     "jsdoc": "^3.6.2",
     "mocha": "6.0.2",
+    "mysql2": "^1.6.5",
     "os": "^0.1.1",
+    "sequelize": "^5.8.10",
     "swagger-jsdoc": "^3.2.9",
     "winston": "^3.2.1"
   },

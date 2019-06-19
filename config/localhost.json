@@ -1,5 +1,11 @@
 {
-  "Logger": {
-    "LogLevel": "silly"
+  "database": {
+    "name": "",
+    "username": "",
+    "password": "",
+    "dialect": "",
+    "host": "",
+    "port": 3306,
+    "logging": false
   }
 }

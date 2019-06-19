@@ -7,14 +7,25 @@ const logger      = require("./utils/logger");
 const setupSwagger = require("./docs/swaggerConfig");
 const cluster     = require("cluster");
 const numCPUs     = require("os").cpus().length;
+const sequelize   = require("./database/index");
 
 const app         = new Express();
 const port        = process.env.PORT || config.get("DefaultPort");
 
 const { NODE_ENV = "" } = process.env;
 
+
 if (cluster.isMaster && NODE_ENV !== "test") {
   logger.info(`[${config.get("ServiceName")}] - Master ${process.pid} is running`);
+
+  //DB connection.
+  sequelize.authenticate()
+ .then(() => {
+   logger.info("Connection has been established successfully...");
+ })
+ .catch(err => {
+   logger.info("Unable to connect to the database:", err);
+ });
 
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
